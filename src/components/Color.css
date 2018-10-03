@@ -1,0 +1,11 @@
+.color-box {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: 20px;
+  height: inherit;
+  display: inline;
+}

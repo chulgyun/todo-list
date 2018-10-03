@@ -6,7 +6,7 @@ class TodoItem extends Component {
     return this.props.checked !== nextProps.checked;
   }
   render() {
-    const { text, checked, id, onToggle, onRemove } = this.props;
+    const { text, checked, id, color, onToggle, onRemove } = this.props;
     console.log('render todoitem');
 
     return(
@@ -18,7 +18,7 @@ class TodoItem extends Component {
         }> &times;
         </div>
         <div className = { `todo-text ${checked && 'checked'}` }>
-          <div>{ text }</div>
+          <div style = {{color: color}}>{ text }</div>
         </div>
         { checked && (<div className = 'check-mark'>✓</div>) }
       </div>

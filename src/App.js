@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import TodoListTemplate from './components/TodoListTemplate'
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
+import Palette from './components/Palette';
 
 class App extends Component {
   id = 3;
+  colors = ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
 
   state = {
     input: '',
     todos: [
-      { id: 0, text: ' introduce react', checked: false },
-      { id: 1, text: ' introduce react', checked: true },
-      { id: 2, text: ' introduce react', checked: false },
-    ]
+      { id: 0, text: ' introduce react', checked: false, color: this.colors[0] },
+      { id: 1, text: ' introduce react', checked: true, color: this.colors[0] },
+      { id: 2, text: ' introduce react', checked: false, color: this.colors[0] },
+    ],
+    color: '#343a40'
   }
 
   handleChange = (e) => {
@@ -22,14 +25,15 @@ class App extends Component {
   }
 
   handleCreate = () => {
-    const { input, todos } = this.state;
+    const { input, todos, color } = this.state;
 
     this.setState({
       input: '',
       todos: todos.concat({
         id: this.id++,
         text: input,
-        checked: false
+        checked: false,
+        color: color
       })
     });
   }
@@ -61,21 +65,34 @@ class App extends Component {
     this.setState({
       todos: todos.filter((todo) => todo.id !== id)
     });
-  }
+  };
+
+  handleChangeColor = (color) => {
+    this.setState({
+      color: color
+    });
+  };
 
   render() {
-    const { input, todos } = this.state;
+    const { input, todos, color } = this.state;
     const {
       handleChange,
       handleCreate,
       handleKeyPress,
       handleToggle,
-      handleRemove
+      handleRemove,
+      handleChangeColor
     } = this;
 
     return (
-      <TodoListTemplate form={(<Form
+      <TodoListTemplate
+        palette = {(<Palette
+          colors = {this.colors}
+          onChangeColor = {handleChangeColor}
+        />)}
+        form = {(<Form
           value = {input}
+          color = {color}
           onKeyPress = {handleKeyPress}
           onChange = {handleChange}
           onCreate = {handleCreate}
